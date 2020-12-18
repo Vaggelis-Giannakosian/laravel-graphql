@@ -18,3 +18,9 @@ mix.js('resources/js/app.js', 'public/js')
     .browserSync({
         proxy: 'graph.test'
     });
+
+
+if(mix.inProduction())
+{
+    mix.version()
+}
