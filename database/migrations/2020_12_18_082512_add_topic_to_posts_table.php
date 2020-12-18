@@ -32,9 +32,11 @@ class AddTopicToPostsTable extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             $table->dropForeign(['topic_id']);
-            $table->dropForeign(['author_id']);
-
             $table->removeColumn('topic_id');
+        });
+
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropForeign(['author_id']);
             $table->removeColumn('author_id');
         });
     }

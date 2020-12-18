@@ -24,9 +24,9 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'title'=>$this->faker->sentence,
-            'lead'=>$this->faker->paragraphs(2,true),
-            'content'=> $this->faker->paragraphs(3, true),
+            'title'=>$this->faker->sentence(3),
+            'lead'=>$this->faker->text(200),
+            'content'=> $this->faker->paragraphs(10, true),
             'author_id'=> function(){
                 return User::factory()->create();
             },

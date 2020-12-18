@@ -16,7 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $topics = Topic::factory()->count(5)->create();
+        $topics = collect([
+            Topic::factory()->create(['name'=>'Featured Sites','slug'=>'featured',]),
+            Topic::factory()->create(['name'=>'Useful Links','slug'=>'links',]),
+            Topic::factory()->create(['name'=>'Guides & Tutorials','slug'=>'tutorials',])
+        ]);
+
         $users = User::factory(12)->create();
 
         $users->each(function ($user) use($topics) {
