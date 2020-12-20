@@ -11,8 +11,14 @@
     <body class="antialiased">
         <div id="app">
 
+            <p>
+                <router-link :to="{ name:'index' }">Index</router-link>
+                <router-link to="/posts/1">Posts</router-link>
+            </p>
+
+
+            <router-view></router-view>
+
         </div>
-
-
     </body>
 </html>
