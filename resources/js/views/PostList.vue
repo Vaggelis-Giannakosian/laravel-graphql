@@ -20,29 +20,41 @@
 
     export default {
         name: "PostList",
+        data(){
+            return {
+                limit:20
+            }
+        },
         components: {'post': PostListItem},
         apollo: {
-            posts: gql`{
-                posts (first:20) {
-                    paginatorInfo{
-                        total
-                        perPage
-                        currentPage
-                        lastPage
-                    }
-                    data{
-                        id
-                        title
-                        lead
-                        author {
-                          name
+            posts: {
+                query: gql`query ($first: Int) {
+                    posts (first: $first) {
+                        paginatorInfo{
+                            total
+                            perPage
+                            currentPage
+                            lastPage
                         }
-                        topic {
-                           name
+                        data{
+                            id
+                            title
+                            lead
+                            author {
+                              name
+                            }
+                            topic {
+                               name
+                            }
                         }
+                     }
+                }`,
+                variables(){
+                    return {
+                        first: this.limit
                     }
-                 }
-            }`,
+                }
+            },
             topics: gql`{
                 topics{
                     id

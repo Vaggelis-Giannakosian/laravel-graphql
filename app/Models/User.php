@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class,'author_id');
     }
+
+    public function getAvatarPathAttribute()
+    {
+        return url("/faces/{$this->avatar}") ;
+    }
 }
