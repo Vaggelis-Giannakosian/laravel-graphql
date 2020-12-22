@@ -1,6 +1,16 @@
 <template>
-    <div>
-       <ul>
+    <div class="container mx-auto my-20 px-4 w-full md:w-3/4 lg:w-3/5 xl:w-1/2">
+
+        <h2 class="text-4xl">
+            All Posts
+        </h2>
+        <div>Loading: {{ $apollo.loading }}</div>
+        <div>Is posts loading: {{ $apollo.queries.posts.loading }}</div>
+
+        <p v-if="$apollo.queries.posts.loading">
+            Loading...
+        </p>
+       <ul v-else>
            <li v-for="(post,index) in posts.data" v-text="post.title" :key="post.id"></li>
        </ul>
     </div>
@@ -11,11 +21,6 @@
 
     export default {
         name: "PostList",
-        data(){
-            return {
-                posts:{}
-            }
-        },
         apollo: {
             posts: gql`{
                 posts {
@@ -31,6 +36,12 @@
                         lead
                     }
                  }
+            }`,
+            topics: gql`{
+                topics{
+                    id
+                    name
+                }
             }`
         }
     }
