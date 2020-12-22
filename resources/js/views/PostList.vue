@@ -4,26 +4,26 @@
         <h2 class="text-4xl">
             All Posts
         </h2>
-        <div>Loading: {{ $apollo.loading }}</div>
-        <div>Is posts loading: {{ $apollo.queries.posts.loading }}</div>
 
         <p v-if="$apollo.queries.posts.loading">
             Loading...
         </p>
-       <ul v-else>
-           <li v-for="(post,index) in posts.data" v-text="post.title" :key="post.id"></li>
-       </ul>
+       <div v-else>
+           <post class="mt-10 border rounded p-4 shadow-lg" v-for="(post,index) in posts.data" :post="post" :key="post.id"> </post>
+       </div>
     </div>
 </template>
 
 <script>
     import gql from 'graphql-tag'
+    import PostListItem from "../components/PostListItem";
 
     export default {
         name: "PostList",
+        components: {'post': PostListItem},
         apollo: {
             posts: gql`{
-                posts {
+                posts (first:20) {
                     paginatorInfo{
                         total
                         perPage
@@ -34,6 +34,12 @@
                         id
                         title
                         lead
+                        author {
+                          name
+                        }
+                        topic {
+                           name
+                        }
                     }
                  }
             }`,
