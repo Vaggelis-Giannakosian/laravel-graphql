@@ -8,7 +8,9 @@
         <div  v-else>
 
             <div class="text-lg text-gray-600">
-                By {{ post.author.name }} in {{ post.topic.name }} | 3 hours ago
+                By {{ post.author.name }} in
+                <router-link class="underline hover:text-black" :to="{name:'topic',params:{slug:post.topic.slug}}" v-text="post.topic.name"></router-link>
+                | 3 hours ago
             </div>
 
             <h1 class="text-4xl mt-10 font-bold mb-12" v-text="post.title"></h1>
