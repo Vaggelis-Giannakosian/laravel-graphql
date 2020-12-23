@@ -5,9 +5,10 @@
         </router-link>
         <p  class="text-gray-600 pb-3" v-html="post.lead"></p>
         <div class="text-sm text-gray-600">
-            Written by {{post.author.name}} in
-            <router-link :to="{name:'topic', params:{slug: post.topic.slug}}">
-                <span class="hover:underline hover:text-gray-900" v-text="post.topic.name"></span>
+            Written by
+            <router-link :to="{name:'author',params:{id:post.author.id}}" class="hover:underline hover:text-gray-900" v-text="post.author.name"></router-link>
+            in
+            <router-link class="hover:underline hover:text-gray-900" :to="{name:'topic', params:{slug: post.topic.slug}}" v-text="post.topic.name">
              </router-link> |
             3 hours ago
         </div>

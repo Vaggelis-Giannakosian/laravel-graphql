@@ -1,7 +1,7 @@
 <template>
     <div class="container mx-auto my-20 px-4 w-full md:w-3/4 lg:w-3/5 xl:w-1/2">
 
-        <div v-if="$apollo.queries.topic.loading">
+        <div v-if="$apollo.queries.user.loading">
             Loading...
         </div>
 
@@ -12,10 +12,10 @@
                     All Posts
                 </router-link>
                 <span class="text-gray-600">/</span>
-                {{ topic.name }}
+                {{ user.name }}
             </h2>
 
-            <post class="mt-10 border rounded p-4 shadow-lg" v-for="(post,index) in topic.posts" :post="post" :key="post.id"> </post>
+            <post class="mt-10 border rounded p-4 shadow-lg" v-for="(post,index) in user.posts" :post="post" :key="post.id"> </post>
 
         </div>
 
@@ -23,19 +23,21 @@
     </div>
 </template>
 
+
 <script>
     import gql from 'graphql-tag';
     import PostListItem from "../components/PostListItem";
 
     export default {
-        name: "TopicPostList",
+        name: "AuthorPostList",
         components:{
             'post':PostListItem
         },
         apollo: {
-            topic: {
-                query: gql` query($slug: String!){
-                            topic(slug: $slug){
+            user: {
+                query: gql` query($id: ID!){
+                            user(id: $id){
+                              id
                               name
                               posts {
                                 id
@@ -55,7 +57,7 @@
                         }`,
                 variables(){
                     return {
-                        slug: this.$route.params.slug
+                        id: this.$route.params.id
                     }
                 }
             }

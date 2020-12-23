@@ -8,7 +8,9 @@
         <div  v-else>
 
             <div class="text-lg text-gray-600">
-                By {{ post.author.name }} in
+                By
+                <router-link :to="{name:'author',params:{id:post.author.id}}" class="underline hover:text-black" v-text="post.author.name"></router-link>
+                in
                 <router-link class="underline hover:text-black" :to="{name:'topic',params:{slug:post.topic.slug}}" v-text="post.topic.name"></router-link>
                 | 3 hours ago
             </div>
@@ -22,8 +24,12 @@
                     <img class="w-16 h-16 rounded-full" :src="avatarPath" alt="Author avatar">
                 </div>
                 <div class="flex flex-col justify-center">
-                    <div class="text-xl text-gray-600">Written by {{ post.author.name}}</div>
-                    <div class="text-gray-600">Publiched in {{post.topic.name}} on May 19 2020 </div>
+                    <div class="text-xl text-gray-600">Written by
+                        <router-link :to="{name:'author',params:{id:post.author.id}}" class="hover:text-black hover:underline" v-text="post.author.name"></router-link>
+                    </div>
+                    <div class="text-gray-600">Published in
+                        <router-link class="hover:text-black hover:underline" :to="{name:'topic',params:{slug:post.topic.slug}}" v-text="post.topic.name"></router-link>
+                       on May 19 2020 </div>
                 </div>
             </div>
 

@@ -6,6 +6,7 @@ import PostList from "./views/PostList";
 import Post from "./views/Post";
 import ApolloClient from 'apollo-boost'
 import TopicPostList from "./views/TopicPostList";
+import AuthorPostList from "./views/AuthorPostList";
 
 window.Vue = Vue;
 
@@ -26,6 +27,11 @@ const routes = [
         path:'/topics/:slug',
         name:'topic',
         component: TopicPostList
+    },
+    {
+        path:'/authors/:id',
+        name:'author',
+        component: AuthorPostList
     }
 ];
 
