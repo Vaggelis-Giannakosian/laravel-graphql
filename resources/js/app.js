@@ -7,6 +7,7 @@ import Post from "./views/Post";
 import ApolloClient from 'apollo-boost'
 import TopicPostList from "./views/TopicPostList";
 import AuthorPostList from "./views/AuthorPostList";
+import NotFoundPage from "./views/NotFoundPage";
 
 window.Vue = Vue;
 
@@ -36,9 +37,7 @@ const routes = [
     {
         path:'*',
         name:'404',
-        component: {
-            template: `<div>Not Found</div>`
-        }
+        component: NotFoundPage
     }
 ];
 
