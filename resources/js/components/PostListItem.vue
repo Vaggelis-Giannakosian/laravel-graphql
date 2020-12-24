@@ -10,18 +10,27 @@
             in
             <router-link class="hover:underline hover:text-gray-900" :to="{name:'topic', params:{slug: post.topic.slug}}" v-text="post.topic.name">
              </router-link> |
-            3 hours ago
+
+            {{ timeago }}
+
         </div>
     </div>
 </template>
 
 <script>
+    import moment from 'moment'
+
     export default {
         props:{
             post:Object,
             required:true
         },
         name: "PostListItem",
+        computed:{
+            timeago(){
+                return moment(this.post.created_at).fromNow()
+            }
+        }
     }
 </script>
 

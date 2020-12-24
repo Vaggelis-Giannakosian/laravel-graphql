@@ -12,7 +12,9 @@
                 <router-link :to="{name:'author',params:{id:post.author.id}}" class="underline hover:text-black" v-text="post.author.name"></router-link>
                 in
                 <router-link class="underline hover:text-black" :to="{name:'topic',params:{slug:post.topic.slug}}" v-text="post.topic.name"></router-link>
-                | 3 hours ago
+                |
+
+                {{ timeago }}
             </div>
 
             <h1 class="text-4xl mt-10 font-bold mb-12" v-text="post.title"></h1>
@@ -29,7 +31,10 @@
                     </div>
                     <div class="text-gray-600">Published in
                         <router-link class="hover:text-black hover:underline" :to="{name:'topic',params:{slug:post.topic.slug}}" v-text="post.topic.name"></router-link>
-                       on May 19 2020 </div>
+
+                        in
+
+                        {{longDate}} </div>
                 </div>
             </div>
 
@@ -40,6 +45,7 @@
 
 <script>
     import gql from 'graphql-tag'
+    import moment from "moment";
 
     export default {
         name: "Post",
@@ -49,6 +55,7 @@
                        post (id: $id) {
                          title
                          content
+                         created_at
                          author{
                            id
                            name
@@ -70,6 +77,12 @@
         computed: {
             avatarPath(){
                 return this.post.author.avatarPath
+            },
+            timeago(){
+                return moment(this.post.created_at).fromNow()
+            },
+            longDate(){
+                return moment(this.post.created_at).format('MMMM Do YYYY')
             }
         }
     }
